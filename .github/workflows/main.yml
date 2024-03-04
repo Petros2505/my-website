@@ -37,7 +37,6 @@
 
 
 
-
 name: Publish Docker image and Deploy to GKE
 
 on:
@@ -98,10 +97,9 @@ jobs:
         uses: owner/repository/path/to/action.yaml@v0.4.0
         with:
           cluster_name: cluster-1
-          location: europe-central2-a	
+          location: europe-central2-a
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Deploy to GKE
         run: |
           kubectl set image deployment/front-deployment front=gcr.io/${{ secrets.GCP_PROJECT_ID }}/peto2505/website:${{ github.sha }}
-
