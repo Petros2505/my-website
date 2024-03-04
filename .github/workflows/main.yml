@@ -23,10 +23,9 @@ jobs:
         run: docker build -t image:latest .
       
       - name: Push Docker image to Docker Hub
-        run: |
-          retries=3
-          until [ $retries -le 0 ] || docker push image:latest; do
-            echo "Retrying..."
-            retries=$((retries-1))
-            sleep 10
-          done
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: |
+            yourdockerhubusername/image:latest
