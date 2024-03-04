@@ -28,4 +28,4 @@ jobs:
           context: .
           push: true
           tags: |
-            yourdockerhubusername/image:latest
+            peto2505/website:latest
