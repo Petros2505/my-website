@@ -97,11 +97,11 @@ jobs:
       - name: Set Kubernetes credentials
         uses: google-github-actions/setup-gke@v0.4.0
         with:
-          cluster_name: your-cluster-name
-          location: your-cluster-region
+          cluster_name: cluster-1
+          location: europe-central2-a
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Deploy to GKE
         run: |
-          kubectl set image deployment/your-deployment-name your-container-name=gcr.io/${{ secrets.GCP_PROJECT_ID }}/peto2505/website:${{ github.sha }}
+          kubectl set image deployment/front-deployment front=gcr.io/${{ secrets.GCP_PROJECT_ID }}/peto2505/website:${{ github.sha }}
 
