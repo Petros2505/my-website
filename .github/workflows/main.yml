@@ -94,7 +94,7 @@ jobs:
           docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/peto2505/website:${{ github.sha }}
 
       - name: Set Kubernetes credentials
-        uses: owner/repository/path/to/action.yaml@v0.4.0
+        uses: uses: actions/set-kubernetes-credentials.yaml@v0.4.0
         with:
           cluster_name: cluster-1
           location: europe-central2-a
