@@ -1,34 +1,30 @@
-name: Publish Docker image
+name: Publish Docker image to GCP Container Registry
 
 on:
   push:
     branches: ['master']
 
 jobs:
-  push_to_registry:
-    name: Push Docker image to Docker Hub
+  push_to_gcr:
+    name: Push Docker image to GCP Container Registry
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      
-      - name: Login to Docker Hub
-        id: login
-        uses: docker/login-action@v2
+
+      - name: Configure Docker CLI
+        uses: google-github-actions/auth@v0
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          service-account-key: ${{ secrets.GCP_SA_KEY }}
       
       - name: Build Docker image
-        run: docker build -t image:latest .
-      
-      - name: Push Docker image to Docker Hub
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: |
-            peto2505/website:latest
+        run: |
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/website:latest .
+          docker images # Optionally, you can list Docker images to verify the build
+
+      - name: Push Docker image to GCP Container Registry
+        run: |
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/website:latest
 
 
 
