@@ -48,8 +48,7 @@ jobs:
         location: ${{ env.GKE_ZONE }}
 
     - name: Build Docker image
-      run: |    
-         IMAGE_TAG=$(git rev-parse --short HEAD) .
+      run: IMAGE_TAG=$(git rev-parse --short HEAD) .
       
     - name: Push Docker image to Docker Hub
       uses: docker/build-push-action@v2
