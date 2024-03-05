@@ -1,11 +1,11 @@
-name: Build and Deploy to GKEE
+name: Build and Deploy to GKE
 
 on:
   push:
     branches: [ "main" ]
 
 env:
-  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   GAR_LOCATION: europe-central2 # TODO: update region of the Artifact Registry
   GKE_CLUSTER: cluster-1    # TODO: update to cluster name
   GKE_ZONE: europe-central2-a   # TODO: update to cluster zone
