@@ -18,14 +18,11 @@ jobs:
           service-account-key: ${{ secrets.GCP_SA_KEY }}
       
       - name: Build Docker image
-        run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/website:latest .
-          docker images # Optionally, you can list Docker images to verify the build
+        run: docker build -t image:latest .
 
       - name: Push Docker image to GCP Container Registry
         run: |
           docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/website:latest
-
 
 
 
