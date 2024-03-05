@@ -31,7 +31,7 @@ jobs:
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
-        credentials_json: /path/to/your/service-account-key.json 
+        credentials_json: ./kinetic-object-413113-3739451ce669.json 
 
 
     - name: Docker configuration
