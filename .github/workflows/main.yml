@@ -31,9 +31,7 @@ jobs:
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
       with:
-        token_format: 'access_token'
-        workload_identity_provider: 'projects/kinetic-object-413113/locations/europe-central2/workloadIdentityPools/default-pool'
-        service_account: 'service_account@kinetic-object-413113.iam.gserviceaccount.com'
+        credentials_json: /path/to/your/service-account-key.json 
 
 
     - name: Docker configuration
