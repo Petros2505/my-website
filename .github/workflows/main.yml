@@ -1,25 +1,22 @@
-name: Publish Docker image to GCP Container Registry
+name: GCP Authentication Example
 
 on:
   push:
-    branches: ['master']
+    branches:
+      - main
 
 jobs:
-  push_to_gcr:
-    name: Push Docker image to GCP Container Registry
+  authenticate:
+    name: Authenticate with GCP
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repo
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Configure Docker CLI
-        uses: google-github-actions/auth@v1
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v0
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
-      
-      - name: Build Docker image
-        run: docker build -t image:latest .
 
-      - name: Push Docker image to GCP Container Registry
-        run: |
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/website:latest
+      - name: List GCP Projects
+        run: gcloud projects list
