@@ -47,5 +47,6 @@ jobs:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
 
-
+    - name: Build Docker image
+      run: docker build -t image:latest .
 
