@@ -56,11 +56,11 @@ jobs:
         context: .
         push: true
         tags: |
-          peto2505/website:latest
-
+          peto2505/website:v1
+          
     - name: Update Deployment with new image
       run: |
-        kubectl set image deployment/front-deployment front=peto2505/website:latest --record
+        kubectl set image deployment/front-deployment front=peto2505/website:v1 --record
 
 # Optional: Wait for rollout to complete
     - name: Wait for Rollout
