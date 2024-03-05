@@ -1,23 +1,48 @@
-name: GCP Authentication Example
+name: Build and Deploy to GKE
 
 on:
   push:
-    branches:
-      - master
+    branches: [ "main" ]
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GAR_LOCATION: europe-central2 # TODO: update region of the Artifact Registry
+  GKE_CLUSTER: cluster-1    # TODO: update to cluster name
+  GKE_ZONE: europe-central2-a   # TODO: update to cluster zone
+  DEPLOYMENT_NAME: front-deployment # TODO: update to deployment name
+  REPOSITORY: peto2505/website # TODO: update to Artifact Registry docker repository
+  IMAGE: static-site
 
 jobs:
-  authenticate:
-    name: Authenticate with GCP
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
+    environment: production
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - name: Authenticate with GCP
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_file: kinetic-object-413113-3739451ce669.json
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        token_format: 'access_token'
+        workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+        service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
 
-      - name: List GCP Projects
-        run: |
-          gcloud projects list || echo "Failed to list GCP projects"
+
+    - name: Docker configuration
+      run: |-
+        echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://$GAR_LOCATION-docker.pkg.dev
+    
+    
+    - name: Set up GKE credentials
+      uses: google-github-actions/get-gke-credentials@v0
+      with:
+        cluster_name: ${{ env.GKE_CLUSTER }}
+        location: ${{ env.GKE_ZONE }}
