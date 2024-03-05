@@ -13,9 +13,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Configure Docker CLI
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v1
         with:
-          service-account-key: ${{ secrets.GCP_SA_KEY }}
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
       
       - name: Build Docker image
         run: docker build -t image:latest .
@@ -23,6 +23,7 @@ jobs:
       - name: Push Docker image to GCP Container Registry
         run: |
           docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/website:latest
+
 
 
 
