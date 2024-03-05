@@ -60,7 +60,7 @@ jobs:
 
     - name: Update Deployment with new image
       run: |
-        kubectl set image deployment/front-deployment front=peto2505/website:image:latest --record
+        kubectl set image deployment/front-deployment front=peto2505/website:latest --record
 
 # Optional: Wait for rollout to complete
     - name: Wait for Rollout
