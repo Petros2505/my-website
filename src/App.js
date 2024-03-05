@@ -16,21 +16,21 @@ function App() {
 
   if (isLoading) return <LoadingSpinner />;
 
-  // return (
-  //   <BrowserRouter>
-  //     <Routes>
-  //       <Route path="/" element={<Home />} />
-  //       <Route path="home" element={<Home />} />
-  //       <Route path="signup" element={<SignUp />} />
-  //       <Route path="login" element={<Login />} />
-  //       <Route path="cars" element={<BookCars />} />
-  //       <Route path="cars/:id" element={<Rent />} />
-  //       <Route path="profile" element={<Profile />} />
-  //       <Route path="dashboard" element={<Dashboard />} />
-  //       <Route path="*" element={<NotFound />} />
-  //     </Routes>
-  //   </BrowserRouter>
-  // );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="login" element={<Login />} />
+        <Route path="cars" element={<BookCars />} />
+        <Route path="cars/:id" element={<Rent />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
