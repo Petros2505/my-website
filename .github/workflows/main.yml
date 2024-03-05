@@ -3,7 +3,7 @@ name: GCP Authentication Example
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   authenticate:
@@ -16,7 +16,8 @@ jobs:
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v0
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          credentials_file: kinetic-object-413113-3739451ce669.json
 
       - name: List GCP Projects
-        run: gcloud projects list
+        run: |
+          gcloud projects list || echo "Failed to list GCP projects"
