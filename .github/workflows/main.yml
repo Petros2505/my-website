@@ -27,8 +27,8 @@ jobs:
     - name: Build Docker image
       run: |
         gcloud auth configure-docker europe-central2-a.pkg.dev
-        docker images
         docker build -t europe-central2-a.pkg.dev/kinetic-object-413113/my-img:row .
+        docker images
         docker push europe-central2-a.pkg.dev/kinetic-object-413113/gcr.io/my-img:row
         
 #        docker tag europe-central2-a.pkg.dev/kinetic-object-413113/my-img:row eu-central2-a.pkg.dev/kinetic-object-413113/my-img:why
