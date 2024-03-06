@@ -48,10 +48,10 @@ jobs:
         location: europe-central2-a
 
     - name: Build Docker image
-      run: docker build -t gcr.io/kinetic-object-413113/imageee .
+      run: docker build -t gcr.io/kinetic-object-413113/imageee:hello .
 
     - name: Push Docker image to Google Container Registry
-      run: docker push gcr.io/kinetic-object-413113/imageee:green
+      run: docker push gcr.io/kinetic-object-413113/imageee:hello
           
 #    - name: Update Deployment with new image
 #      run: |
