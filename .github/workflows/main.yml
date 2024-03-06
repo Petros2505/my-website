@@ -47,8 +47,8 @@ jobs:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
 
-    - name: Build Docker image
-      run: IMAGE_TAG=$(git rev-parse --short HEAD) .
+#    - name: Build Docker image
+#      run: IMAGE_TAG=$(git rev-parse --short HEAD) .
       
     - name: Push Docker image to Docker Hub
       uses: docker/build-push-action@v2
@@ -56,11 +56,11 @@ jobs:
         context: .
         push: true
         tags: |
-          peto2505/website:IMAGE_TAG
+          peto2505/website:v2
           
     - name: Update Deployment with new image
       run: |
-        kubectl set image deployment/front-deployment front=peto2505/website:IMAGE_TAG --record
+        kubectl set image deployment/front-deployment front=peto2505/website:v2 --record
 
 # Optional: Wait for rollout to complete
     - name: Wait for Rollout
