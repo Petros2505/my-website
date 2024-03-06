@@ -26,9 +26,6 @@ jobs:
 
     - name: Build Docker image
       run: |
-         docker build -t gcr.io/kinetic-object-413113/gcr.io/my-img:xyz .
-         docker push gcr.io/kinetic-object-413113/gcr.io/my-img:xyz
-#         docker images 
-#         gcloud auth configure-docker eu-central2-a.pkg.dev
-#         docker build -t eu-central2-a.pkg.dev/kinetic-object-413113/my-img:why .
-#         docker push eu-central2-a.pkg.dev/kinetic-object-413113/gcr.io/my-img:why
+         gcloud auth configure-docker eu-central2-a.pkg.dev
+         docker build -t eu-central2-a.pkg.dev/kinetic-object-413113/my-img:why .
+         docker push eu-central2-a.pkg.dev/kinetic-object-413113/gcr.io/my-img:why
