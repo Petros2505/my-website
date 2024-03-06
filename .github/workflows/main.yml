@@ -4,15 +4,6 @@ on:
   push:
     branches: [ "master" ]
 
-env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  GAR_LOCATION: europe-central2 # TODO: update region of the Artifact Registry
-  GKE_CLUSTER: cluster-1    # TODO: update to cluster name
-  GKE_ZONE: europe-central2-a   # TODO: update to cluster zone
-  DEPLOYMENT_NAME: front-deployment # TODO: update to deployment name
-  REPOSITORY: peto2505/website # TODO: update to Artifact Registry docker repository
-  IMAGE: static-site
-
 jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
@@ -31,33 +22,10 @@ jobs:
       uses: google-github-actions/auth@v1
       with:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
-#        service account key : ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
-        
-#    - name: Docker configuration
-#      id: login
-#      uses: docker/login-action@v2
-#      with:
-#        username: ${{ secrets.DOCKER_USERNAME }}
-#        password: ${{ secrets.DOCKER_PASSWORD }}
-    
-    
- #   - name: Set up GKE credentials
-#      uses: google-github-actions/get-gke-credentials@v0
-#      with:
-#        cluster_name: cluster-1
-#        location: europe-central2-a
 
     - name: Build Docker image
       run: |
          gcloud auth configure-docker eu-central2-a.pkg.dev
          docker build -t eu-central2-a.pkg.dev/kinetic-object-413113/imageee:hello .
          docker push eu-central2-a.pkg.dev/kinetic-object-413113/imageee:hello
-          
-#    - name: Update Deployment with new image
-#      run: |
-#        kubectl set image deployment/front-deployment front=peto2505/website:v2 --record
-
-# Optional: Wait for rollout to complete
-#    - name: Wait for Rollout
-#      run: kubectl rollout status deployment/front-deployment
