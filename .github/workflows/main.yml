@@ -41,11 +41,11 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     
     
-    - name: Set up GKE credentials
-      uses: google-github-actions/get-gke-credentials@v0
-      with:
-        cluster_name: cluster-1
-        location: europe-central2-a
+ #   - name: Set up GKE credentials
+#      uses: google-github-actions/get-gke-credentials@v0
+#      with:
+#        cluster_name: cluster-1
+#        location: europe-central2-a
 
     - name: Build Docker image
       run: |
