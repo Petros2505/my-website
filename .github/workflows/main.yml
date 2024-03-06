@@ -30,15 +30,16 @@ jobs:
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v1
       with:
-        credentials_json: ${{ secrets.GCP_SA_KEY }}
-
+#        credentials_json: ${{ secrets.GCP_SA_KEY }}
+        service account key : ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
         
-    - name: Docker configuration
-      id: login
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+#    - name: Docker configuration
+#      id: login
+#      uses: docker/login-action@v2
+#      with:
+#        username: ${{ secrets.DOCKER_USERNAME }}
+#        password: ${{ secrets.DOCKER_PASSWORD }}
     
     
  #   - name: Set up GKE credentials
@@ -49,8 +50,9 @@ jobs:
 
     - name: Build Docker image
       run: |
-         docker build -t gcr.io/kinetic-object-413113/imageee:hello .
-         docker push gcr.io/kinetic-object-413113/imageee:hello
+         gcloud auth configure-docker eu-central2-a.pkg.dev
+         docker build -t eu-central2-a.pkg.dev/kinetic-object-413113/imageee:hello .
+         docker push eu-central2-a.pkg.dev/kinetic-object-413113/imageee:hello
           
 #    - name: Update Deployment with new image
 #      run: |
