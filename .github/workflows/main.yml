@@ -44,14 +44,14 @@ jobs:
     - name: Set up GKE credentials
       uses: google-github-actions/get-gke-credentials@v0
       with:
-        cluster_name: ${{ env.GKE_CLUSTER }}
-        location: ${{ env.GKE_ZONE }}
+        cluster_name: cluster-1
+        location: europe-central2-a
 
     - name: Build Docker image
-      run: docker build -t gcr.io/kinetic-object-413113/image .
+      run: docker build -t gcr.io/kinetic-object-413113/imageee .
 
     - name: Push Docker image to Google Container Registry
-      run: docker push gcr.io/kinetic-object-413113/image:green
+      run: docker push gcr.io/kinetic-object-413113/imageee:green
           
 #    - name: Update Deployment with new image
 #      run: |
