@@ -49,11 +49,8 @@ jobs:
 
     - name: Build Docker image
       run: |
-        gcloud auth login
-        gcloud auth configure-docker
-        sudo systemctl restart docker
-        docker build -t gcr.io/kinetic-object-413113/imageee:hello .
-        docker push gcr.io/kinetic-object-413113/imageee:hello
+         docker build -t gcr.io/kinetic-object-413113/imageee:hello .
+         docker push gcr.io/kinetic-object-413113/imageee:hello
           
 #    - name: Update Deployment with new image
 #      run: |
