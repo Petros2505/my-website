@@ -27,7 +27,7 @@ jobs:
     - name: Build Docker image
       run: |
         gcloud auth configure-docker
-        gcloud auth login
+        gcloud auth list
         docker build -t gcr.io/kinetic-object-413113/my-img:red .
         docker images
         docker push gcr.io/kinetic-object-413113/my-img:red
