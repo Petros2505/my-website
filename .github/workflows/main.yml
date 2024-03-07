@@ -32,18 +32,13 @@ jobs:
         docker push gcr.io/kinetic-object-413113/my-img:red
 
 
-    - name: Authenticate to GCP
-      uses: google-github-actions/auth@v1
-      with:
-        credentials_json: ${{ secrets.GCP_SA_KEY }}
-        project_id: kinetic-object-413113
 
+    - name: Deploy to GKE
+    
     - uses: simenandre/setup-gke-gcloud-auth-plugin@v1
     - uses: google-github-actions/get-gke-credentials@v1
-      with:
-        cluster_name: my-cluster
-        location: us-central1-a
     - run: |
+        gcloud container clusters get-credentials cluster-1 --zone europe-central2-a --project kinetic-object-413113
         kubectl set image deployment/front-deployment front=gcr.io/kinetic-object-413113/my-img:row 
         kubectl get pods
 
