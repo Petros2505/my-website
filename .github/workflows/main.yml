@@ -34,8 +34,8 @@ jobs:
     - name: Deploy to GKE
       uses: simenandre/setup-gke-gcloud-auth-plugin@v1
     - run: |
-        sudo apt-get update
-        sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
         gcloud container clusters get-credentials cluster-1 --zone europe-central2-a --project kinetic-object-413113
         kubectl set image deployment/front-deployment front=gcr.io/kinetic-object-413113/my-img:red
         kubectl get pods
+#        sudo apt-get update
+#        sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
