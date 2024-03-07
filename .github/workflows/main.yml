@@ -29,6 +29,6 @@ jobs:
         gcloud auth configure-docker europe-central2-a.pkg.dev
         docker build -t europe-central2-a.pkg.dev/kinetic-object-413113/my-repo/my-img:row .
         docker images
-        docker push europe-central2-a.pkg.dev/kinetic-object-413113/my-repo/my-img:row
+        docker push europe-central2-a.pkg.dev/kinetic-object-413113/my-img:row
         
 
