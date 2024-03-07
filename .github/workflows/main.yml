@@ -34,6 +34,10 @@ jobs:
     - name: Deploy to GKE
       run: |
         gcloud container clusters get-credentials cluster-1 --zone europe-central2-a --project kinetic-object-413113
-        kubectl set gcr.io/kinetic-object-413113/my-img deployment/front-deployment front=gcr.io/kinetic-object-413113/my-img:row --record# Optional: Wait for rollout to complete
+        kubectl set image deployment/front-deployment front=gcr.io/kinetic-object-413113/my-img:red --record
+
+    - name: Wait for rollout to complete
+      run: |
+        kubectl rollout status deployment/front-deployment
         
 
