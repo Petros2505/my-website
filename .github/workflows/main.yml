@@ -36,8 +36,8 @@ jobs:
         gcloud container clusters get-credentials cluster-1 --zone europe-central2-a
         kubectl set image deployment/front-deployment front=gcr.io/kinetic-object-413113/my-img:red
 
-    - name: Wait for rollout to complete
-      run: |
-        kubectl rollout status deployment/front-deployment
+#    - name: Wait for rollout to complete
+#      run: |
+#       kubectl rollout status deployment/front-deployment
         
 
