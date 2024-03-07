@@ -27,15 +27,15 @@ jobs:
     - name: Build Docker image
       run: |
         gcloud auth configure-docker
-        docker build -t gcr.io/kinetic-object-413113/my-img:blue .
+        docker build -t gcr.io/kinetic-object-413113/my-img:${GITHUB_SHA} .
         docker images
-        docker push gcr.io/kinetic-object-413113/my-img:blue
+        docker push gcr.io/kinetic-object-413113/my-img:${GITHUB_SHA}
 
     - name: Deploy to GKE
       uses: simenandre/setup-gke-gcloud-auth-plugin@v1
     - run: |
         gcloud container clusters get-credentials cluster-1 --zone europe-central2-a --project kinetic-object-413113
-        kubectl set image deployment/front-deployment front=gcr.io/kinetic-object-413113/my-img:blue
+        kubectl set image deployment/front-deployment front=gcr.io/kinetic-object-413113/my-img:${GITHUB_SHA}
         kubectl get pods
 #        sudo apt-get update
 #        sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
