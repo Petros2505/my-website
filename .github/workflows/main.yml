@@ -24,17 +24,12 @@ jobs:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
 
+    - name: Authenticate to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
     - name: Build Docker image
       run: |
-        gcloud auth configure-docker
-        docker build -t gcr.io/kinetic-object-413113/my-img:${GITHUB_WORKFLOW_SHA} .
+        docker build -t ${DOCKER_USERNAME}/my-img:${GITHUB_WORKFLOW_SHA} .
         docker images
-        docker push gcr.io/kinetic-object-413113/my-img:${GITHUB_WORKFLOW_SHA}
+        docker push ${DOCKER_USERNAME}/my-img:${GITHUB_WORKFLOW_SHA}
 
-    - name: Deploy to GKE
-      uses: simenandre/setup-gke-gcloud-auth-plugin@v1
-    - run: |
-        gcloud container clusters get-credentials cluster-1 --zone europe-central2-a --project kinetic-object-413113
-        kubectl set image deployment/front-deployment front=gcr.io/kinetic-object-413113/my-img:${GITHUB_WORKFLOW_SHA}
-        kubectl get pods
-# dbhbdjbdjdbddb
