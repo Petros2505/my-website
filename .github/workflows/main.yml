@@ -29,7 +29,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t ${DOCKER_USERNAME}/my-img:${GITHUB_WORKFLOW_SHA} .
+        docker build -t peto2505/website:${GITHUB_WORKFLOW_SHA} .
         docker images
-        docker push ${DOCKER_USERNAME}/my-img:${GITHUB_WORKFLOW_SHA}
+        docker push peto2505/website:${GITHUB_WORKFLOW_SHA}
 
