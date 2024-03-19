@@ -34,8 +34,8 @@ jobs:
         docker push peto2505/website:${GITHUB_WORKFLOW_SHA}
     - name: Set Docker environment to Minikube
       uses: medyagh/setup-minikube@master
-    - name: get pods
-      run: kubectl get pods -A
     - name: deploy helm
       run: helm install ReleseName my-chart
+    - name: get pods
+      run: kubectl get pods -A
       
