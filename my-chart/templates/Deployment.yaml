@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.labels }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.labels }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.labels }}
+    spec:
+      containers:
+      - name: {{ .Values.containers_name }}
+        image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        # resources:
+        #   limits:
+        #     cpu: "1"
+        #     memory: "2000Mi"
+        #   requests:
+        #     cpu: "1"
+        #     memory: "1500Mi"
+        ports:
+        - containerPort: 80
+ 

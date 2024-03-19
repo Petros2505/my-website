@@ -1,0 +1,18 @@
+appName: my-app
+namespace: default
+labels: my-app
+replicas: 1
+
+containers_name: my-front
+image:
+  name: peto2505/my-front-app
+  tag: latest
+
+svc_name: my-svc
+svc_labels: my-svcc
+
+autoscaling:
+  enabled: true
+  name: my-autoscaling
+  cpu: 50
+  memory: 50
