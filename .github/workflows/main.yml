@@ -35,7 +35,7 @@ jobs:
     - name: Set Docker environment to Minikube
       uses: medyagh/setup-minikube@master
     - name: deploy helm
-      run: helm install ReleseName my-chart
+      run: helm install chart my-chart
     - name: get pods
       run: kubectl get pods -A
       
