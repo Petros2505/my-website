@@ -33,10 +33,6 @@ jobs:
         docker images
         docker push peto2505/website:${GITHUB_WORKFLOW_SHA}
     - name: Set Docker environment to Minikube
-      run: |
-        eval $(minikube docker-env)
-
-    - name: Apply Kubernetes manifests
-      run: |
-        kubectl apply -f kubernetes-manifests/
-
+      uses: medyagh/setup-minikube@master
+    - name: get pods
+      run: kubectl get pods
